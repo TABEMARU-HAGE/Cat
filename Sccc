@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>タブメニュー</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap" rel="stylesheet">
+</head>
+<style>
+.tabs {
+  overflow: hidden;
+}
+.tablink {
+  background-color: #6B6BA1bb;
+  font-size: 17px;
+  color: #E7E7E7;
+  border-radius: 10px;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  width: 84px;
+  height: 30px;
+}
+
+.basebutton {
+  background-color: #FFFFFFbb;
+  font-size: 8px;
+  color: #E7E7E7;
+  border-radius: 6px;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+
+/* 選択されたタブリンクのスタイル */
+.tablink.active {
+  background-color: #807EB3bb;
+}
+
+div.outer {
+  display: inline-block;
+  background-color: #807EB3bb;  
+  padding-left: 0.5em;      
+  padding-right: 0.5em;    
+  padding-top: 0.5em;    
+  padding-bottom: 0.5em; 
+  margin-top: 10px;
+  width: 300px;
+  height: 160px;
+  border-radius: 10px;
+}
+
+div.inner {
+  display: inline-block;
+  background-color: #6B6BA1bb;
+  width: 299px;
+  height: 159px;
+  border-radius: 10px;
+  overflow: scroll;
+ color: #E7E7E7;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  color: #E7E7E7bb;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+div.inner::-webkit-scrollbar{
+  display: none;
+}
+
+@keyframes tenmetsu {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+/* 要素にアニメーションを適用 */
+.light {
+	    animation-name: tenmetsu;
+    animation-duration: 1.0s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+.checkboxItem {
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+  width: fit-content;
+  line-height: 1;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.checkboxItem:not(:last-of-type) {
+  margin-bottom: 16px;
+}
+
+.checkbox {
+  appearance: none;
+  position: relative;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #152111;
+  border-radius: 2px;
+  cursor: pointer;
+  background-color: #222222bb;
+}
+
+.checkbox:checked {
+  background-color: #222222bb;
+}
+
+.checkbox:checked::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 0.9px;
+  width: 10px;
+  height: 5px;
+  border-bottom: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  transform: rotate(-45deg);
+}
+a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.buttonOutlineGlow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 24px;
+  background-color: #222222bb;
+  border: 1.5px solid #152111;
+  border-radius: 12px; 
+}
+
+@media (any-hover: hover) {
+  .buttonOutlineGlow .buttonOutlineGlow_bg {
+    transition: opacity 0.3s;
+  }
+
+  .buttonOutlineGlow:hover {
+    background-color: #939393;
+  }
+
+  .buttonOutlineGlow:hover .buttonOutlineGlow_bg {
+    opacity: 1;
+  }
+}
+
+</style>
+<body>
+<div class="tabs">
+    <button class="tablink" onclick="openTab('tab1')">Tab 1</button>
+    <button class="tablink" onclick="openTab('tab2')">Tab 2</button>
+    <button class="tablink" onclick="openTab('tab3')">Tab 3</button>
+</div>
+
+
+<div class="outer">
+<div class="inner">
+<div id="tab1"  class="tabcontent">
+ <a href="#" class="buttonOutlineGlow" onclick="SetCatCan()">1<span>
+  </a>
+ <a href="#" class="buttonOutlineGlow" onclick="SetXP()">2<span>
+  </a>
+<label class="checkboxItem">
+  <input type="checkbox" name="checkbox" value="選択肢1" class="checkbox" checked />
+  選択肢1
+</label>
+</div>
+      
+<div id="tab2" class="tabcontent">
+    <h3>Tab 2 Content</h3>
+    <p>Some more text..</p>
+</div>
+      
+<div id="tab3" class="tabcontent">
+<a class="light" onclick="h5gg.pickScriptFile(onClickLoadScript)">Load other scripts</a>
+</div>
+</div>
+</div>
+  <script>
+
+
+function openTab(tabName) {
+  let i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");//コンテンツのDOM取得
+  //全コンテンツを一度見えなくする
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");//ボタンのDOM取得
+  //全タブのボタンのフォーカスを除去する
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "block";//選択されたIDを持つコンテンツを表示
+  event.currentTarget.className += " active";//選択されたボタンにactiveクラスを付与する
+}
+setWindowRect((window.screen.height - 400) / 2, (window.screen.width - 250) / 2, 400, 250);
+        setWindowDrag(0, 0, 400, 30);
+var h5gg_jquery_stub;
+
+if(typeof $ == 'undefined')
+    document.write("<script src=\"https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js\"><\/script>");
+
+function refreshLocalSrcipts()
+{
+    $("table#localjslist tr").remove();
+    
+    var jsfiles = h5gg.getLocalScripts();
+
+    setTimeout(function(){
+        
+        if(jsfiles.length==0) {
+            $("table#localjslist tbody").append("<tr><td colspan=2>Searching App's Documents Directory...<br/>Searching .app Bundle Directory...<br/>No (*.js) or (*.html) files found!</td></td>");
+        }
+        
+        $("table#localjslist tbody").append('<tr><td style="border-right-style:none; color:blue">Browser on File App</td><td style="border-left-style:none;width:45px"><button onclick="h5gg.pickScriptFile(onClickLoadScript)">Load</button></td></tr>');
+        
+        for(var i=0; i<jsfiles.length; i++) {
+            var row = '<tr><td style="border-right-style:none;font-weight:bold;color:green">'+jsfiles[i].name+'</td><td style="border-left-style:none;width:45px"><button onclick="onClickLoadScript(\''+jsfiles[i].path+'\')">Load</button></td></tr>';
+            $("table#localjslist tbody").append(row);
+        }
+    }, 300);
+}
+
+function onShowLoadScript(show)
+{
+    if(show) {
+        $("#maskview").show();
+        $("#popup_loadscripts").show();
+        
+        if(typeof h5gg!='undefined') refreshLocalSrcipts();
+    } else {
+        $("#maskview").hide();
+        $("#popup_loadscripts").hide();
+    }
+}
+
+function onClickLoadScript(url, type)
+{
+    if(!url) return;
+    
+    if(/^\w+\:/.test(url)==false) url = "file://"+url;
+    
+    try{
+        url = new URL(url);
+        url.searchParams.append("_", Math.random());
+    }catch(e){
+        alert("invliad URL!");
+        return;
+    }
+    
+    $("#popup_progress").show();
+    $("#maskview_script").show();
+    
+    if(type=='h5' || (!type&&!/\.js$/.test(url.pathname))) {
+        window.location = url.href;
+        return;
+    }
+    
+    var script = document.createElement("script");
+
+    script.type = "text/javascript";
+    
+    script.onload = function () {
+      alert("JS Run Complete!");
+        $("#popup_progress").hide();
+        $("#maskview_script").hide();
+    };
+    
+    script.onerror = function () {
+        alert("Load Error!\nURL Invalid or Network Exception!");
+        $("#popup_progress").hide();
+        $("#maskview_script").hide();
+    };
+
+    script.src = url.href;
+    document.body.appendChild(script);
+}
+
+
+//弹出搜索或修改窗口
+function showPopView(name, action, type, value)
+{
+    $("#maskview").show();
+    $("#popup_search_edit").show();
+    $("#popup_search_edit").find("B#titleBar").html(name);
+    $("#popup_search_edit").find("button#action").html(name);
+    
+    if(type) {
+        $("table#datatype td").each(function(){
+            if($(this).text()==type)
+                $(this).addClass("selected");
+            else
+                $(this).removeClass("selected");
+        });
+    }
+    
+    if(value) {
+        $("input#datavalue").val(value);
+    }
+    
+    $("input#datavalue").focus();
+    
+    $("#popup_search_edit").find("button#action").unbind("click").click(function(){
+        var type = $("table#datatype td.selected").text();
+        var value = $("input#datavalue").val();
+        
+        $("#popup_search_edit").hide();
+        $("#popup_progress").show();
+        
+        setTimeout(function() {
+            
+            action(type, value);
+            
+            $("#popup_progress").hide();
+            $("#maskview").hide();
+        }, 200);
+        
+    });
+    
+    $("#popup_search_edit").find("button#cancel").unbind("click").click(function(){
+        $("#maskview").hide();
+        $("#popup_search_edit").hide();
+    });
+    
+    $("table#datatype td").unbind("click").click(function(){
+        $("table#datatype td").removeClass("selected");
+        $(this).addClass("selected");
+        $("input#datavalue").focus();
+    });
+}
+</script>
+
+<script>
+
+</script>
+</body>
+</html>
